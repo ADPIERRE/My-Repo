@@ -1,8 +1,8 @@
 select * from countries
 select * from departments 
-select * from employees
+select * from employees select * from departments 
 select * from job_history
-select * from locations
+select * from locations select * from departments 
 select * from jobs 
 select * from regions
 
@@ -43,3 +43,33 @@ select first_name, last_name, department_id from employees where department_id =
 select first_name, last_name, department_id, salary from employees where department_id=
 (select department_id from employees where first_name = 'martha' and last_name = 'sullivan') and salary>
 (select salary from employees where first_name ='tj' and last_name = 'olson')
+
+11.) Display all the departments that exist in the departments table that are not in the employees’ table. Do not use a where clause.
+
+select department_id from departments
+except
+select distinct department_id from employees
+
+12.) Display all the departments that exist in department tables that are also in the employees’ table. Do not use a where clause.
+
+select department_id from departments
+intersect
+select distinct department_id from employees
+
+
+13.) Display all the departments name, street address, postal code, city, and state of each department. Use the departments and locations table for this query.
+
+select d.department_id, d.department_name, l.street_address, l.postal_code, l.city, l.state_province from departments d 
+join locations l on d.location_id = l.location_id
+
+14.) Display the first name and salary of all the employees in the accounting departments. 
+
+select e.first_name, e.salary, d.department_name from employees e join departments d on e.department_id = d.department_id where d.department_name = 'accounting'
+
+15.) Display all the last name of all the employees whose department location id are 1700 and 1800.
+
+16.) Display the phone number of all the employees in the Marketing department.
+
+select e.phone_number, d.department_name from employees e join departments d on e.department_id = d.department_id where d.department_name = 'marketing'
+
+17.) Display all the employees in the Shipping and Marketing departments who make more than 3100.
